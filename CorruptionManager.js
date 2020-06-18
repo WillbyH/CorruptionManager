@@ -187,6 +187,7 @@ function main() {
 registerPlugin({
     name: 'Hidden Object Corruption Manager',
     version: '1.0',
+    licence: 'MIT',
     authors: ['Willby'],
     type: 'local',
     main: main
