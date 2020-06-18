@@ -5,23 +5,7 @@ var remove = false;
 var downCoord = void 0;
 var currentCoord = void 0;
 
-function CorruptionState(state) {
-  for (var y = 0; y < map.size.y; y++) {
-    for (var x = 0; x < map.size.x; x++) {
-      var tile = map.getTile(x, y);
-      if (tile.numElements>0) {
-        for (var i = 0; i < tile.numElements; i++) {
-          var element = tile.getElement(i);
-          if ((element.isHidden)&&(state==true)) {
-            element.isHidden = false;
-          }
-        }
-      }
-    }
-  }
-}
-
-function selectTheMap() {
+function selectTheMap() { // Display Selection
     var left = Math.min(downCoord.x, currentCoord.x);
     var right = Math.max(downCoord.x, currentCoord.x);
     var top = Math.min(downCoord.y, currentCoord.y);
@@ -32,7 +16,7 @@ function selectTheMap() {
     };
 }
 
-function finishSelection() {
+function finishSelection() { // Modify tiles in the selected area once the mouseUp has activated
   var left = Math.floor(Math.min(downCoord.x, currentCoord.x) / 32);
   var right = Math.floor(Math.max(downCoord.x, currentCoord.x) / 32);
   var top = Math.floor(Math.min(downCoord.y, currentCoord.y) / 32);
@@ -131,7 +115,7 @@ function ct_window() {
               remove = e;
           }
       },],
-      onClose: function onClose() {
+      onClose: function onClose() { // Stop selection tool when the window closes
         window = null;
         if (ui.tool && ui.tool.id == "corruption-manager-tool") {
           ui.tool.cancel();
@@ -143,7 +127,7 @@ function ct_window() {
 
 function main() {
   ui.registerMenuItem("Corruption Manager", function() {
-    ui.activateTool({ // Well done Oli! This is some good code
+    ui.activateTool({ // Create tool for selecting area
         id: "corruption-manager-tool",
         cursor: "cross_hair",
         onStart: function onStart(e) {
